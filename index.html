@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GTS life Restaurant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #b71c1c;
+      --primary-dark: #7f0000;
+      --accent: #ffcc80;
+      --bg: #111;
+      --text: #f5f5f5;
+      --muted: #bdbdbd;
+      --card-bg: #1c1c1c;
+      --max-width: 1100px;
+      --radius: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #333 0, #000 50%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(0,0,0,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .logo span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      box-shadow: 0 0 8px rgba(255,204,128,0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.6);
+      opacity: 0.95;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: none;
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 4.5rem 1.25rem 3rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--muted);
+      background: rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e676;
+      box-shadow: 0 0 10px rgba(0,230,118,0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .hero-image-card {
+      background: radial-gradient(circle at top left, rgba(255,204,128,0.15), transparent 55%),
+                  radial-gradient(circle at bottom, rgba(183,28,28,0.6), #000);
+      border-radius: 30px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .hero-image-main {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+      max-height: 270px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .hero-tag-card {
+      position: absolute;
+      bottom: 1.3rem;
+      left: 1.5rem;
+      background: rgba(0,0,0,0.75);
+      padding: 0.65rem 0.9rem;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-tag-card strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .hero-rating {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(0,0,0,0.8);
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem;
+    }
+
+    section {
+      margin-top: 3.5rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.6rem;
+    }
+
+    .section-head p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .menu-grid {
+      display: grid;
+      gap: 1.3rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-name {
+      font-weight: 600;
+    }
+
+    .menu-price {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .menu-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .menu-tag {
+      display: inline-flex;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .about-highlight {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted);
+      background: rgba(0,0,0,0.5);
+    }
+
+    .about-card {
+      background: var(--card-bg);
+      padding: 1.1rem 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+      font-size: 0.9rem;
+    }
+
+    .about-card-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.45rem;
+      color: var(--muted);
+    }
+
+    .about-card-row strong {
+      color: #fff;
+    }
+
+    .reservations {
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04), transparent 60%);
+      border-radius: 26px;
+      padding: 1.5rem 1.5rem 1.7rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.7rem;
+      margin-top: 1rem;
+    }
+
+    .reservations p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    label {
+      color: var(--muted);
+    }
+
+    input, select, textarea {
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    textarea {
+      border-radius: 12px;
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #777;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(255,204,128,0.35);
+    }
+
+    .reservation-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .contact-box {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-info strong {
+      color: #fff;
+    }
+
+    .map-placeholder {
+      background: linear-gradient(135deg, #212121, #000);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      border: 1px dashed rgba(255,255,255,0.18);
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      margin-top: 2.5rem;
+      padding: 1.4rem 1.25rem 1.7rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    /* Small screens */
+    @media (max-width: 850px) {
+      .hero,
+      .two-column,
+      .reservations,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 3.2rem;
+      }
+
+      .hero-image-card {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <span></span>
+        GTS life
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservations">Reservations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn btn-outline" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'});">
+        Book a Table
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="badge">
+        <span class="badge-dot"></span> Now accepting reservations
+      </div>
+      <h1>Modern dining with <span>timeless</span> flavors.</h1>
+      <p class="hero-sub">
+        At GTS life, we celebrate the art of slow cooking, local ingredients, and warm hospitality —
+        right in the heart of the city.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'});">
+          Reserve now
+        </button>
+        <button class="btn btn-outline" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">
+          View today’s menu
+        </button>
+      </div>
+
+      <div class="hero-meta">
+        <div>
+          <strong>4:00 PM – 11:00 PM</strong>
+          Daily service
+        </div>
+        <div>
+          <strong>Chef’s tasting</strong>
+          Available Fri–Sun
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-card">
+      <!-- This image can be static, or you can later wire it also to Sheets if you want -->
+      <img class="hero-image-main" src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Restaurant dish">
+      <div class="hero-tag-card">
+        <strong>Chef’s Signature</strong>
+        Charred salmon • Citrus glaze • Micro herbs
+      </div>
+      <div class="hero-rating">
+        ★ 4.9 • 1.2k reviews
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head">
+        <h2>About GTS life</h2>
+        <p>
+          A cozy, contemporary restaurant where seasonal ingredients meet bold, international flavors.
+          Perfect for date nights, celebrations, and everything in between.
+        </p>
+      </div>
+
+      <div class="two-column">
+        <div class="about-text">
+          <p>
+            Our menu changes with the seasons, highlighting local farmers, fishers, and artisans.
+            Every dish is crafted to be simple, elegant, and full of flavor.
+          </p>
+          <p>
+            Whether you’re joining us for a quick lunch or a leisurely dinner, our team is here to make
+            you feel at home from the first hello to the last dessert spoon.
+          </p>
+
+          <div class="about-highlight">
+            <span class="chip">Locally sourced ingredients</span>
+            <span class="chip">Handcrafted cocktails</span>
+            <span class="chip">Vegetarian friendly</span>
+            <span class="chip">Private events & catering</span>
+          </div>
+        </div>
+
+        <aside class="about-card">
+          <div class="about-card-row">
+            <span>Location</span>
+            <strong>Main Street, City Center</strong>
+          </div>
+          <div class="about-card-row">
+            <span>Hours</span>
+            <strong>Mon–Sun • 4 PM–11 PM</strong>
+          </div>
+          <div class="about-card-row">
+            <span>Phone</span>
+            <strong>+123 456 7890</strong>
+          </div>
+          <div class="about-card-row">
+            <span>Special nights</span>
+            <strong>Live jazz every Friday</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+      <div class="section-head">
+        <h2>Featured Menu</h2>
+        <p>
+          A small taste of what we’re serving this week. Ask your server about our seasonal specials and chef’s tasting menu.
+        </p>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <!-- Menu items will be loaded from Google Sheets -->
+        <!-- Fallback content -->
+        <p style="color: var(--muted); font-size: 0.9rem;">Loading menu...</p>
+      </div>
+    </section>
+
+    <!-- RESERVATIONS -->
+    <section id="reservations">
+      <div class="section-head">
+        <h2>Reservations</h2>
+        <p>
+          Book a table in seconds. We’ll confirm your reservation by phone or email within a few minutes.
+        </p>
+      </div>
+
+      <div class="reservations">
+        <div>
+          <p>
+            For same-day reservations for groups of 8 or more, please call us directly at
+            <strong>+123 456 7890</strong>.
+          </p>
+
+          <form id="reservationForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Full name</label>
+                <input id="name" type="text" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" type="tel" placeholder="+123 456 7890" required>
+              </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input id="date" type="date" required>
+              </div>
+              <div class="form-group">
+                <label for="time">Time</label>
+                <input id="time" type="time" required>
+              </div>
+              <div class="form-group">
+                <label for="guests">Guests</label>
+                <select id="guests" required>
+                  <option value="">Select</option>
+                  <option>1–2</option>
+                  <option>3–4</option>
+                  <option>5–6</option>
+                  <option>7–8</option>
+                  <option>9+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="occasion">Occasion (optional)</label>
+                <input id="occasion" type="text" placeholder="Birthday, date night…">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Special requests</label>
+              <textarea id="notes" placeholder="Allergies, seating preference, or any notes"></textarea>
+            </div>
+
+            <button class="btn" type="submit" style="margin-top: 0.7rem;">
+              Request reservation
+            </button>
+
+            <p class="reservation-note">
+              By submitting, you agree to our 15-minute grace period. We’ll hold your table for 15 minutes after your reserved time.
+            </p>
+
+            <p id="reserveMessage" style="font-size:0.85rem;color:var(--muted);margin-top:0.4rem;"></p>
+          </form>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom: 0.7rem;">Private dining & events</h3>
+          <p style="color: var(--muted); margin-bottom: 0.8rem;">
+            Planning a celebration, corporate dinner, or intimate gathering?
+            We offer customizable set menus and a private dining room for up to 20 guests.
+          </p>
+          <ul style="color: var(--muted); padding-left: 1.1rem; margin-bottom: 1rem; font-size: 0.9rem;">
+            <li>Customizable 3- to 5-course menus</li>
+            <li>Wine pairings curated by our sommelier</li>
+            <li>Audio system for speeches or background music</li>
+          </ul>
+          <p style="color: var(--muted); font-size: 0.85rem;">
+            Email us at <strong>events@lasavore.com</strong> to start planning your event.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-head">
+        <h2>Find us</h2>
+        <p>
+          We’re easy to reach by car, taxi, or public transport. Street parking and a nearby garage are available.
+        </p>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-info">
+          <p><strong>Address</strong><br> 123 Main Street, City Center</p>
+          <p><strong>Phone</strong><br> +123 456 7890</p>
+          <p><strong>Email</strong><br> hello@lasavore.com</p>
+          <p><strong>Social</strong><br> @lasavore on Instagram & Facebook</p>
+        </div>
+
+        <div class="map-placeholder">
+          <strong>Map placeholder</strong>
+          <span>Embed a Google Map iframe here once you’re live.</span>
+          <span style="font-size: 0.8rem; opacity: 0.8;">
+            Go to Google Maps → Share → Embed a map → copy the iframe code and paste it here.
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> GTS life. All rights reserved.</span>
+      <span>Website by <a href="#">YourBrand</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Update footer year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ==== GOOGLE SHEETS INTEGRATION ====
+
+    // TODO: paste your Google Apps Script Web App URL here:
+    const API_URL = "https://script.google.com/macros/s/AKfycbwSgBfAfo69jQ8i8KXec-32zEytxPYHfBz8barcWZHI0eu1X9fJ4OqEWFvXULXHf5T-/exec";
+
+    // Load menu from Google Sheets
+    async function loadMenu() {
+      const grid = document.getElementById("menuGrid");
+
+      try {
+        const res = await fetch(API_URL); // GET => menu
+        const menu = await res.json();
+
+        if (!Array.isArray(menu) || menu.length === 0) {
+          grid.innerHTML = "<p style='color:var(--muted);font-size:0.9rem;'>Menu coming soon. Please check back later.</p>";
+          return;
+        }
+
+        grid.innerHTML = "";
+        menu.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "menu-card";
+
+          card.innerHTML = `
+            ${item.image ? `<img src="${item.image}" alt="${item.item}" style="width:100%;border-radius:12px;margin-bottom:10px;object-fit:cover;max-height:180px;">` : ""}
+            <div class="menu-card-header">
+              <div class="menu-name">${item.item || ""}</div>
+              <div class="menu-price">${item.price ? "$" + item.price : ""}</div>
+            </div>
+            <p class="menu-desc">${item.description || ""}</p>
+            ${item.tag ? `<span class="menu-tag">${item.tag}</span>` : ""}
+          `;
+
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = "<p style='color:#ff8a80;font-size:0.9rem;'>Unable to load menu. Please try again later.</p>";
+      }
+    }
+
+    // Handle reservation submission
+    const form = document.getElementById("reservationForm");
+    const reserveMessage = document.getElementById("reserveMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      reserveMessage.textContent = "Sending reservation...";
+
+      const data = {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        guests: document.getElementById("guests").value,
+        occasion: document.getElementById("occasion").value.trim(),
+        notes: document.getElementById("notes").value.trim()
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+
+        const json = await res.json();
+        if (json.status === "success") {
+          reserveMessage.style.color = "#a5d6a7";
+          reserveMessage.textContent = "Reservation saved! We'll contact you shortly.";
+          form.reset();
+        } else {
+          reserveMessage.style.color = "#ff8a80";
+          reserveMessage.textContent = "Something went wrong. Please call us directly.";
+        }
+      } catch (err) {
+        console.error(err);
+        reserveMessage.style.color = "#ff8a80";
+        reserveMessage.textContent = "Network error. Please try again or call us.";
+      }
+    });
+
+    // Initial load
+    loadMenu();
+  </script>
+</body>
+</html>
