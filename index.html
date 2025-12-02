@@ -187,7 +187,7 @@ footer{border-top:1px solid var(--border-color);margin-top:3rem;padding:1.5rem 0
 </div>
 <div class="two-column">
 <div class="about-text">
-<p>Founded in 2015 by Ghannaway Tech, our menu changes with the seasons, bringing the freshest ingredients directly from local farms to your plate.</p>
+<p>Founded in 2025 by Ghannaway Tech, our menu changes with the seasons, bringing the freshest ingredients directly from local farms to your plate.</p>
 <p>Our mission is to create dishes that surprise, delight, and satisfy. Every meal tells a story.</p>
 <div class="about-highlight">
 <span class="chip">Seasonal</span>
@@ -218,7 +218,7 @@ footer{border-top:1px solid var(--border-color);margin-top:3rem;padding:1.5rem 0
 <img class="menu-image" src="https://images.pexels.com/photos/10319561/pexels-photo-10319561.jpeg" alt="Seafood Paella">
 <div class="menu-card-header">
 <div class="menu-name">Seafood Paella</div>
-<div class="menu-price">$32.00</div>
+<div class="menu-price">Ksh 32.00</div>
 </div>
 <p class="menu-desc">Saffron-infused Arborio rice, Gulf shrimp, mussels, chorizo, and fresh herbs.</p>
 <span class="menu-tag">NEW!</span>
@@ -274,10 +274,10 @@ footer{border-top:1px solid var(--border-color);margin-top:3rem;padding:1.5rem 0
 <p><strong>Phone</strong>+254 757 041 431</p>
 <p><strong>Address</strong>123 Ruiru, Nairobi City, FC 12345</p>
 <div class="social-icons">
-<a href="#"><i class="fab fa-facebook"></i></a>
-<a href="#"><i class="fab fa-instagram"></i></a>
-<a href="#"><i class="fab fa-twitter"></i></a>
-<a href="#"><i class="fab fa-youtube"></i></a>
+<a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com/"><i class="fab fa-facebook"></i></a>
+<a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com/"><i class="fab fa-instagram"></i></a>
+<a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com/"><i class="fab fa-twitter"></i></a>
+<a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com/"><i class="fab fa-youtube"></i></a>
 </div>
 </div>
 <div class="map-placeholder">
@@ -328,7 +328,7 @@ async function loadMenu() {
     menu.forEach(item => {
       if (!item.item || item.price == null) return;
 
-      const priceStr = (typeof item.price === 'number') ? "$" + item.price.toFixed(2) : item.price.startsWith('$') ? item.price : "$" + item.price;
+      const priceStr = (typeof item.price === 'number') ? "$" + item.price.toFixed(2) : item.price.startsWith('Ksh') ? item.price : "$" + item.price;
 
       const card = document.createElement("article");
       card.className = "menu-card";
