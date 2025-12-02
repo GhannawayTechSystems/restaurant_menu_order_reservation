@@ -328,7 +328,7 @@ async function loadMenu() {
     menu.forEach(item => {
       if (!item.item || item.price == null) return;
 
-      const priceStr = (typeof item.price === 'number') ? "$" + item.price.toFixed(2) : item.price.startsWith('Ksh') ? item.price : "$" + item.price;
+      const priceStr = (typeof item.price === 'number') ? "$" + item.price.toFixed(2) : item.price.startsWith('$') ? item.price : "$" + item.price;
 
       const card = document.createElement("article");
       card.className = "menu-card";
