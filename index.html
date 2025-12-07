@@ -468,37 +468,12 @@
     }
 
     .map-placeholder {
-      background: linear-gradient(135deg, #212121, #000);
+      /* Removed gradient background and dashed border to display the map */
+      /* Kept card styling minimal for the iframe */
       border-radius: var(--radius);
-      padding: 1.1rem 1.3rem;
-      border: 1px dashed rgba(255,255,255,0.18);
-      color: var(--muted);
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.12);
-      margin-top: 2.5rem;
-      padding: 1.4rem 1.25rem 1.7rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    .footer-inner a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
+      padding: 0; 
+      box-shadow: var(--shadow);
+      position: relative;
     }
 
     /* Small screens */
@@ -529,15 +504,37 @@
         align-items: flex-start;
       }
     }
+    
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      margin-top: 2.5rem;
+      padding: 1.4rem 1.25rem 1.7rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
   <header>
     <div class="nav">
       <div class="logo">
         <span></span>
-        GTS life
+        GTS life Demo Site
       </div>
       <nav class="nav-links">
         <a href="#about">About</a>
@@ -546,12 +543,11 @@
         <a href="#contact">Contact</a>
       </nav>
       <button class="btn btn-outline" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'});">
-        Book a Table
+        Book a Reservation 
       </button>
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div>
       <div class="badge">
@@ -585,7 +581,6 @@
     </div>
 
     <div class="hero-image-card">
-      <!-- This image can be static, or you can later wire it also to Sheets if you want -->
       <img class="hero-image-main" src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Restaurant dish">
       <div class="hero-tag-card">
         <strong>Chef’s Signature</strong>
@@ -598,7 +593,6 @@
   </section>
 
   <main>
-    <!-- ABOUT -->
     <section id="about">
       <div class="section-head">
         <h2>About GTS life</h2>
@@ -630,7 +624,7 @@
         <aside class="about-card">
           <div class="about-card-row">
             <span>Location</span>
-            <strong>Main Street, City Center</strong>
+            <strong>Nairobi CBD, Kenya</strong>
           </div>
           <div class="about-card-row">
             <span>Hours</span>
@@ -648,7 +642,6 @@
       </div>
     </section>
 
-    <!-- MENU -->
     <section id="menu">
       <div class="section-head">
         <h2>Featured Menu</h2>
@@ -658,13 +651,10 @@
       </div>
 
       <div class="menu-grid" id="menuGrid">
-        <!-- Menu items will be loaded from Google Sheets -->
-        <!-- Fallback content -->
         <p style="color: var(--muted); font-size: 0.9rem;">Loading menu...</p>
       </div>
     </section>
 
-    <!-- RESERVATIONS -->
     <section id="reservations">
       <div class="section-head">
         <h2>Reservations</h2>
@@ -750,7 +740,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact">
       <div class="section-head">
         <h2>Find us</h2>
@@ -761,18 +750,14 @@
 
       <div class="contact-box">
         <div class="contact-info">
-          <p><strong>Address</strong><br> 123 Main Street, City Center</p>
+          <p><strong>Address</strong><br> Upper Hill, Nairobi CBD, Kenya</p>
           <p><strong>Phone</strong><br> +254757041431</p>
           <p><strong>Email</strong><br> hello@gtslife.com</p>
           <p><strong>Social</strong><br> @gtslife on Instagram & Facebook</p>
         </div>
 
-        <div class="map-placeholder">
-          <strong>Map placeholder</strong>
-          <span>Embed a Google Map iframe here once you’re live.</span>
-          <span style="font-size: 0.8rem; opacity: 0.8;">
-            Go to Google Maps → Share → Embed a map → copy the iframe code and paste it here.
-          </span>
+        <div class="map-placeholder" style="height: 300px; padding: 0; border: none; background: none;">
+          <iframe width="100%" height="100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.824707252277!2d36.8177573!3d-1.2829241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d481f215d7%3A0xf6350c371d18f50!2sNairobi%20CBD!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske" style="border:0; border-radius: var(--radius);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
@@ -781,17 +766,20 @@
   <footer>
     <div class="footer-inner">
       <span>© <span id="year"></span> GTS life. All rights reserved.</span>
-      <span>Website by <a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com">GTS</a></span>
+      <span>Website by <a href="https://ghannawaytechsystems.github.io/ghannawaytechsystems.com">GhannawayTechSystems</a></span>
     </div>
   </footer>
 
   <script>
     // Update footer year automatically
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Prevent selecting past dates in the reservation form
+    document.getElementById('date').min = new Date().toISOString().split("T")[0];
 
     // ==== GOOGLE SHEETS INTEGRATION ====
 
-    // TODO: paste your Google Apps Script Web App URL here:
+    // TODO: Paste your NEW Google Apps Script Web App URL here:
     const API_URL = "https://script.google.com/macros/s/AKfycbwSgBfAfo69jQ8i8KXec-32zEytxPYHfBz8barcWZHI0eu1X9fJ4OqEWFvXULXHf5T-/exec";
 
     // Load menu from Google Sheets
@@ -816,7 +804,7 @@
             ${item.image ? `<img src="${item.image}" alt="${item.item}" style="width:100%;border-radius:12px;margin-bottom:10px;object-fit:cover;max-height:180px;">` : ""}
             <div class="menu-card-header">
               <div class="menu-name">${item.item || ""}</div>
-              <div class="menu-price">${item.price ? "$" + item.price : ""}</div>
+              <div class="menu-price">${item.price ? "KES " + item.price : ""}</div>
             </div>
             <p class="menu-desc">${item.description || ""}</p>
             ${item.tag ? `<span class="menu-tag">${item.tag}</span>` : ""}
