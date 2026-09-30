@@ -537,8 +537,8 @@
         PECKING LOUNGE Demo Site
       </div>
       <nav class="nav-links">
-        <a href="#about">About</a>
         <a href="#menu">Menu</a>
+        <a href="#about">About</a>
         <a href="#reservations">Reservations</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -548,51 +548,66 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div>
-      <div class="badge">
-        <span class="badge-dot"></span> Now accepting reservations
-      </div>
-      <h1>Modern dining with <span>timeless</span> flavors.</h1>
-      <p class="hero-sub">
-        At Pecking Lounge, we celebrate the art of slow cooking, local ingredients, and warm hospitality —
-        right in the heart of the city.
-      </p>
-
-      <div class="hero-actions">
-        <button class="btn" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'});">
-          Reserve now
-        </button>
-        <button class="btn btn-outline" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">
-          View today’s menu
-        </button>
-      </div>
-
-      <div class="hero-meta">
-        <div>
-          <strong>4:00 PM – 11:00 PM</strong>
-          Daily service
-        </div>
-        <div>
-          <strong>Chef’s tasting</strong>
-          Available Fri–Sun
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-image-card">
-      <img class="hero-image-main" src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Restaurant dish">
-      <div class="hero-tag-card">
-        <strong>Chef’s Signature</strong>
-        Charred salmon • Citrus glaze • Micro herbs
-      </div>
-      <div class="hero-rating">
-        ★ 4.9 • 1.2k reviews
-      </div>
-    </div>
-  </section>
-
   <main>
+    <!-- MENU SECTION NOW APPEARS FIRST (replaces hero) -->
+    <section id="menu">
+      <div class="section-head">
+        <h2>Featured Menu</h2>
+        <p>
+          A small taste of what we're serving this week. Ask your server about our seasonal specials and chef's tasting menu.
+        </p>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <p style="color: var(--muted); font-size: 0.9rem;">Loading menu...</p>
+      </div>
+    </section>
+
+    <!-- ORIGINAL HERO SECTION NOW APPEARS SECOND -->
+    <section class="hero" style="margin-top: 2rem;">
+      <div>
+        <div class="badge">
+          <span class="badge-dot"></span> Now accepting reservations
+        </div>
+        <h1>Modern dining with <span>timeless</span> flavors.</h1>
+        <p class="hero-sub">
+          At Pecking Lounge, we celebrate the art of slow cooking, local ingredients, and warm hospitality —
+          right in the heart of the city.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'});">
+            Reserve now
+          </button>
+          <button class="btn btn-outline" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">
+            Back to menu
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <div>
+            <strong>4:00 PM – 11:00 PM</strong>
+            Daily service
+          </div>
+          <div>
+            <strong>Chef's tasting</strong>
+            Available Fri–Sun
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-card">
+        <img class="hero-image-main" src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Restaurant dish">
+        <div class="hero-tag-card">
+          <strong>Chef's Signature</strong>
+          Charred salmon • Citrus glaze • Micro herbs
+        </div>
+        <div class="hero-rating">
+          ★ 4.9 • 1.2k reviews
+        </div>
+      </div>
+    </section>
+
     <section id="about">
       <div class="section-head">
         <h2>About Pecking Lounge</h2>
@@ -609,7 +624,7 @@
             Every dish is crafted to be simple, elegant, and full of flavor.
           </p>
           <p>
-            Whether you’re joining us for a quick lunch or a leisurely dinner, our team is here to make
+            Whether you're joining us for a quick lunch or a leisurely dinner, our team is here to make
             you feel at home from the first hello to the last dessert spoon.
           </p>
 
@@ -642,24 +657,11 @@
       </div>
     </section>
 
-    <section id="menu">
-      <div class="section-head">
-        <h2>Featured Menu</h2>
-        <p>
-          A small taste of what we’re serving this week. Ask your server about our seasonal specials and chef’s tasting menu.
-        </p>
-      </div>
-
-      <div class="menu-grid" id="menuGrid">
-        <p style="color: var(--muted); font-size: 0.9rem;">Loading menu...</p>
-      </div>
-    </section>
-
     <section id="reservations">
       <div class="section-head">
         <h2>Reservations</h2>
         <p>
-          Book a table in seconds. We’ll confirm your reservation by phone or email within a few minutes.
+          Book a table in seconds. We'll confirm your reservation by phone or email within a few minutes.
         </p>
       </div>
 
@@ -715,7 +717,7 @@
             </button>
 
             <p class="reservation-note">
-              By submitting, you agree to our 15-minute grace period. We’ll hold your table for 15 minutes after your reserved time.
+              By submitting, you agree to our 15-minute grace period. We'll hold your table for 15 minutes after your reserved time.
             </p>
 
             <p id="reserveMessage" style="font-size:0.85rem;color:var(--muted);margin-top:0.4rem;"></p>
@@ -744,7 +746,7 @@
       <div class="section-head">
         <h2>Find us</h2>
         <p>
-          We’re easy to reach by car, taxi, or public transport. Street parking and a spacious parking are available.
+          We're easy to reach by car, taxi, or public transport. Street parking and a spacious parking are available.
         </p>
       </div>
 
@@ -757,7 +759,7 @@
         </div>
 
         <div class="map-placeholder" style="height: 300px; padding: 0; border: none; background: none;">
-          <iframe width="100%" height="100%" src="https://www.google.com/maps/@-0.3158119,36.0788604,27372m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D" style="border:0; border-radius: var(--radius);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe width="100%" height="100%" src="https://www.google.com/maps/@-0.3158119,36.0788604,27372m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D" style="border:0; border-radius: 12px;"></iframe>
         </div>
       </div>
     </section>
